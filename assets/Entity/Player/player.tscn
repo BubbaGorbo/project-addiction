@@ -1,0 +1,68 @@
+[gd_scene load_steps=8 format=3 uid="uid://bvkxbe25d524d"]
+
+[ext_resource type="Script" path="res://assets/Entity/Player/player.gd" id="1_sfev4"]
+[ext_resource type="Script" path="res://assets/Entity/Player/health.gd" id="2_gpn37"]
+[ext_resource type="Script" path="res://assets/Entity/Player/camera_anchor.gd" id="2_rrdmf"]
+[ext_resource type="Script" path="res://assets/Entity/Player/player_camera.gd" id="2_v88lw"]
+[ext_resource type="Script" path="res://assets/Entity/Player/mana.gd" id="3_wn0tf"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_v58be"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_ip2jh"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Player-Entity" type="CharacterBody3D" parent="."]
+script = ExtResource("1_sfev4")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player-Entity"]
+shape = SubResource("CapsuleShape3D_v58be")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Player-Entity"]
+mesh = SubResource("CapsuleMesh_ip2jh")
+
+[node name="Camera-Anchor" type="Node3D" parent="Player-Entity"]
+script = ExtResource("2_rrdmf")
+
+[node name="Player-Camera" type="Camera3D" parent="Player-Entity/Camera-Anchor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 3)
+script = ExtResource("2_v88lw")
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1112.0
+offset_bottom = -608.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Base-Container" type="PanelContainer" parent="UI"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 1
+offset_right = 1.0
+offset_bottom = 50.0
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/Base-Container"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Base-Container/MarginContainer"]
+layout_mode = 2
+
+[node name="Mana" type="Label" parent="UI/Base-Container/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Test"
+script = ExtResource("3_wn0tf")
+
+[node name="Health" type="Label" parent="UI/Base-Container/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Test"
+script = ExtResource("2_gpn37")
+
+[connection signal="health_change" from="Player-Entity" to="UI/Base-Container/MarginContainer/VBoxContainer/Health" method="_on_player_entity_health_change"]
+[connection signal="mana_change" from="Player-Entity" to="UI/Base-Container/MarginContainer/VBoxContainer/Mana" method="_on_player_entity_mana_change"]

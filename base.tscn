@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://iwahdmmcm0fn"]
+
+[ext_resource type="PackedScene" uid="uid://d2su3uy8n0gdy" path="res://assets/landscape.glb" id="1_vrxyk"]
+[ext_resource type="PackedScene" uid="uid://bvkxbe25d524d" path="res://assets/Entity/Player/player.tscn" id="2_gwrxc"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="landscape" parent="." instance=ExtResource("1_vrxyk")]
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, 0, 0)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.666806, 0.745232, 0, -0.745232, 0.666806, -1.84953, 28.0266, 2.82896)
+
+[node name="Node3D" parent="." instance=ExtResource("2_gwrxc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.01686, 5.6032, 0.879876)
+
+[node name="THISISACSGBOX" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.663634, 7.08128, 5.81332)

@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://cvc046hy4kby"]
+
+[ext_resource type="PackedScene" uid="uid://btdmgfcg41alp" path="res://models/creature-test.glb" id="1_vxshk"]
+[ext_resource type="Script" path="res://scripts/creature.gd" id="2_oe5jk"]
+
+[node name="creature-test" instance=ExtResource("1_vxshk")]
+script = ExtResource("2_oe5jk")
+
+[node name="Camera3D" type="Camera3D" parent="." index="1"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 15, 2, 0)
