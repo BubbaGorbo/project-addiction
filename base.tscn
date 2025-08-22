@@ -15,4 +15,5 @@ transform = Transform3D(1, 0, 0, 0, 0.666806, 0.745232, 0, -0.745232, 0.666806, 
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.01686, 5.6032, 0.879876)
 
 [node name="THISISACSGBOX" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.663634, 7.08128, 5.81332)
+transform = Transform3D(0.91007, -0.414455, 0, 0.414455, 0.91007, 0, 0, 0, 1, 28.4427, 2.87842, 40.5358)
+size = Vector3(8.21048, 0.324707, 3.58154)
