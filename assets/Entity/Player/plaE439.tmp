@@ -10,9 +10,11 @@
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_ip2jh"]
 
-[node name="PlayerRoot" type="Node3D" node_paths=PackedStringArray("player_entity")]
+[node name="PlayerRoot" type="Node3D"]
 script = ExtResource("1_fyx2x")
-player_entity = NodePath("PlayerEntity")
+MOUSE_SENS = null
+health = null
+mana = null
 
 [node name="PlayerEntity" type="CharacterBody3D" parent="."]
 floor_stop_on_slope = false
@@ -48,4 +50,4 @@ grow_vertical = 2
 
 [node name="TargetSelf" parent="UI" node_paths=PackedStringArray("target") instance=ExtResource("4_1t665")]
 layout_mode = 1
-target = NodePath("../..")
+target = NodePath("../../PlayerEntity")

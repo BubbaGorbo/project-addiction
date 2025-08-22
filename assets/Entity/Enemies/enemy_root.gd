@@ -1,7 +1,19 @@
 extends Node3D
 
-@export var target: Node3D
+@export var health = 100
+var max_health = 100
 
-@onready var health: int = target.health
-@onready var mana: int = target.mana
-@onready var entity_nameplate: String = target.entity_nameplate
+@export var mana = 50
+var max_mana = 50
+
+@export var entity_nameplate = 'Mean Enemy >:('
+
+signal nameplate_signal
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	nameplate_signal.emit(entity_nameplate)
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass

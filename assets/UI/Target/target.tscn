@@ -17,6 +17,10 @@ script = ExtResource("1_4n3f2")
 
 [node name="Window" type="Window" parent="."]
 position = Vector2i(100, 100)
+size = Vector2i(200, 100)
+unresizable = true
+always_on_top = true
+unfocusable = true
 
 [node name="Container" type="PanelContainer" parent="Window"]
 custom_minimum_size = Vector2(100, 100)

@@ -21,8 +21,12 @@ transform = Transform3D(0.91007, -0.414455, 0, 0.414455, 0.91007, 0, 0, 0, 1, 28
 use_collision = true
 size = Vector3(8.21048, 0.324707, 3.58154)
 
-[node name="Enemy" parent="." instance=ExtResource("3_dr0as")]
+[node name="EnemyHostile" parent="." instance=ExtResource("3_dr0as")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.13443, 5.02059, -3.55687)
 
-[node name="TargetRoot" parent="." node_paths=PackedStringArray("target") instance=ExtResource("4_g7xiy")]
-target = NodePath("../Enemy")
+[node name="TargetEnemy" parent="." node_paths=PackedStringArray("target") instance=ExtResource("4_g7xiy")]
+target = NodePath("../EnemyHostile")
+
+[node name="EnemyPassive" parent="." instance=ExtResource("3_dr0as")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.92855, 5.41513, -4.85013)
+entity_nameplate = "Nice Enemy :)"
