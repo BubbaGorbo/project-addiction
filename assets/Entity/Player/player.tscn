@@ -24,7 +24,7 @@ mesh = SubResource("CapsuleMesh_ip2jh")
 [node name="Camera-Anchor" type="Node3D" parent="Player-Entity"]
 script = ExtResource("2_rrdmf")
 
-[node name="Player-Camera" type="Camera3D" parent="Player-Entity/Camera-Anchor" groups=["player_camera"]]
+[node name="Player-Camera" type="Camera3D" parent="Player-Entity/Camera-Anchor"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 3)
 script = ExtResource("2_v88lw")
 
@@ -39,7 +39,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Base-Container" type="PanelContainer" parent="UI"]
-custom_minimum_size = Vector2(50, 50)
+custom_minimum_size = Vector2(100, 100)
 layout_mode = 1
 offset_right = 1.0
 offset_bottom = 50.0
@@ -54,15 +54,15 @@ theme_override_constants/margin_bottom = 10
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/Base-Container/MarginContainer"]
 layout_mode = 2
 
-[node name="Mana" type="Label" parent="UI/Base-Container/MarginContainer/VBoxContainer"]
-layout_mode = 2
-text = "Test"
-script = ExtResource("3_wn0tf")
-
 [node name="Health" type="Label" parent="UI/Base-Container/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Test"
 script = ExtResource("2_gpn37")
+
+[node name="Mana" type="Label" parent="UI/Base-Container/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Test"
+script = ExtResource("3_wn0tf")
 
 [connection signal="health_change" from="Player-Entity" to="UI/Base-Container/MarginContainer/VBoxContainer/Health" method="_on_player_entity_health_change"]
 [connection signal="mana_change" from="Player-Entity" to="UI/Base-Container/MarginContainer/VBoxContainer/Mana" method="_on_player_entity_mana_change"]

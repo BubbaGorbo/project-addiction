@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://cabavqyewbbfy"]
+[gd_scene load_steps=7 format=3 uid="uid://cabavqyewbbfy"]
 
 [ext_resource type="Script" path="res://assets/Entity/Enemies/rigid_body_3d.gd" id="1_23f0l"]
 [ext_resource type="Material" uid="uid://0odxrqq2bvkp" path="res://assets/Entity/Enemies/enemy_material.tres" id="1_hexyo"]
+[ext_resource type="Script" path="res://assets/Entity/Enemies/enemy_root.gd" id="1_hh113"]
 [ext_resource type="Script" path="res://assets/Entity/Enemies/nameplate.gd" id="3_wc45l"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hgu2s"]
@@ -9,20 +10,23 @@
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_sllpf"]
 material = ExtResource("1_hexyo")
 
-[node name="Node3D" type="Node3D"]
+[node name="Node3D" type="Node3D" node_paths=PackedStringArray("enemy_node")]
+script = ExtResource("1_hh113")
+enemy_node = NodePath("StaticBody3D")
 
-[node name="RigidBody3D" type="StaticBody3D" parent="."]
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
 script = ExtResource("1_23f0l")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
 shape = SubResource("CapsuleShape3D_hgu2s")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
 mesh = SubResource("CapsuleMesh_sllpf")
 
-[node name="nameplate" type="Label3D" parent="RigidBody3D"]
+[node name="nameplate" type="Label3D" parent="StaticBody3D" node_paths=PackedStringArray("enemy_entity")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0)
 billboard = 1
 script = ExtResource("3_wc45l")
+enemy_entity = NodePath("..")
 
-[connection signal="nameplate_signal" from="RigidBody3D" to="RigidBody3D/nameplate" method="_on_rigid_body_3d_nameplate_signal"]
+[connection signal="nameplate_signal" from="StaticBody3D" to="StaticBody3D/nameplate" method="_on_rigid_body_3d_nameplate_signal"]
