@@ -10,6 +10,8 @@ var max_health = 100
 @export var mana = 50
 var max_mana = 50
 
+var isAutorunning = false
+
 signal health_change
 signal mana_change
 
@@ -69,6 +71,13 @@ func movement(delta: float) -> void:
 	# Handle jump.
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
+		
+	if Input.is_action_just_pressed("auto_run"):
+		isAutorunning = !isAutorunning
+		if isAutorunning:
+			Input.action_press("forward")
+		else:
+			Input.action_release("forward")
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
