@@ -2,8 +2,12 @@ extends Node3D
 
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
+const ATTACK_RANGE = 7.5
 @export var MOUSE_SENS = 0.25
 @export var player_entity: CharacterBody3D
+# In seconds*
+var attack_delay = 2.0
+var attack_strength = 10
 
 @export var health = 100
 var max_health = 100
@@ -13,21 +17,49 @@ var max_mana = 50
 
 var target: Node3D
 
-var isAutorunning = false
+var is_autorunning = false
+var is_autoattacking = false
+var attack_timer: Timer = Timer.new()
 
 signal health_change
 signal mana_change
 signal target_change
+signal target_stat_change
 	
 func set_target(node: Node3D) -> void:
-	var target = node
+	if target:
+		target.disconnect("health_change", update_target)
+		target.disconnect("mana_change", update_target)
+	
+	target = node
 	target_change.emit(target)
+	target.connect("health_change", update_target)
+	target.connect("mana_change", update_target)
+	
+func update_target(amount) -> void:
+	target_stat_change.emit()
 
 func _ready() -> void:
+	# Init Player Window with Health and Mana
 	health_change.emit(health)
 	mana_change.emit(mana)
 	
-#GlobalScope.time
+	# Attack Timer
+	add_child(attack_timer)
+	attack_timer.one_shot = true
+	attack_timer.start(attack_delay)
+	attack_timer.timeout.connect(_on_timer_timeout)
+
+func _process(delta: float) -> void:
+	if is_autoattacking && attack_timer.time_left == 0:
+		var position_difference = player_entity.position.distance_to(target.position)
+		var is_target_within_range = position_difference <= ATTACK_RANGE
+		if is_target_within_range:
+			target.damage(attack_strength)
+			attack_timer.start(attack_delay)
+		
+func _on_timer_timeout():
+	attack_timer.stop()
 
 func _physics_process(delta: float) -> void:
 	movement(delta)
@@ -81,8 +113,8 @@ func movement(delta: float) -> void:
 		player_entity.velocity.y = JUMP_VELOCITY
 		
 	if Input.is_action_just_pressed("auto_run"):
-		isAutorunning = !isAutorunning
-		if isAutorunning:
+		is_autorunning = !is_autorunning
+		if is_autorunning:
 			Input.action_press("forward")
 		else:
 			Input.action_release("forward")
@@ -103,3 +135,5 @@ func movement(delta: float) -> void:
 func _input(event):
 	if event is InputEventMouseMotion && Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 		player_entity.rotate_y(deg_to_rad(-event.relative.x * MOUSE_SENS))
+	if Input.is_action_just_pressed("auto_attack"):
+		is_autoattacking = !is_autoattacking

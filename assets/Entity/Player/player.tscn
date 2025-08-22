@@ -123,3 +123,5 @@ script = ExtResource("9_ke7fd")
 [connection signal="target_change" from="." to="UI/TargetStats/Container/MarginContainer/VBoxContainer/Name" method="_on_player_root_target_change"]
 [connection signal="target_change" from="." to="UI/TargetStats/Container/MarginContainer/VBoxContainer/Health" method="_on_player_root_target_change"]
 [connection signal="target_change" from="." to="UI/TargetStats/Container/MarginContainer/VBoxContainer/Mana" method="_on_player_root_target_change"]
+[connection signal="target_stat_change" from="." to="UI/TargetStats/Container/MarginContainer/VBoxContainer/Health" method="_on_player_root_target_stat_change"]
+[connection signal="target_stat_change" from="." to="UI/TargetStats/Container/MarginContainer/VBoxContainer/Mana" method="_on_player_root_target_stat_change"]
