@@ -85,7 +85,7 @@ func movement(delta: float) -> void:
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var input_dir := Input.get_vector("left", "right", "forward", "backward")
-	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+	var direction := (player_entity.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	if direction:
 		player_entity.velocity.x = direction.x * SPEED
 		player_entity.velocity.z = direction.z * SPEED
@@ -97,4 +97,4 @@ func movement(delta: float) -> void:
 	
 func _input(event):
 	if event is InputEventMouseMotion && Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
-		rotate_y(deg_to_rad(-event.relative.x * MOUSE_SENS))
+		player_entity.rotate_y(deg_to_rad(-event.relative.x * MOUSE_SENS))

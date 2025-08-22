@@ -24,7 +24,7 @@ size = Vector3(8.21048, 0.324707, 3.58154)
 [node name="EnemyHostile" parent="." instance=ExtResource("3_dr0as")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.13443, 5.02059, -3.55687)
 
-[node name="TargetEnemy" parent="." node_paths=PackedStringArray("target") instance=ExtResource("4_g7xiy")]
+[node name="TargetEnemy" parent="." node_paths=PackedStringArray("target") groups=["target_enemy"] instance=ExtResource("4_g7xiy")]
 target = NodePath("../EnemyHostile")
 
 [node name="EnemyPassive" parent="." instance=ExtResource("3_dr0as")]

@@ -52,6 +52,6 @@ layout_mode = 2
 script = ExtResource("4_cdc7m")
 root_node = NodePath("../../../../..")
 
-[connection signal="on_ready_signal" from="." to="Window/Container/MarginContainer/VBoxContainer/Health" method="_on_target_root_on_ready_signal"]
-[connection signal="on_ready_signal" from="." to="Window/Container/MarginContainer/VBoxContainer/Mana" method="_on_target_root_on_ready_signal"]
-[connection signal="on_ready_signal" from="." to="Window/Container/MarginContainer/VBoxContainer/Name" method="_on_target_root_on_ready_signal"]
+[connection signal="target_signal" from="." to="Window/Container/MarginContainer/VBoxContainer/Health" method="_on_target_root_target_signal"]
+[connection signal="target_signal" from="." to="Window/Container/MarginContainer/VBoxContainer/Mana" method="_on_target_root_target_signal"]
+[connection signal="target_signal" from="." to="Window/Container/MarginContainer/VBoxContainer/Name" method="_on_target_root_target_signal"]

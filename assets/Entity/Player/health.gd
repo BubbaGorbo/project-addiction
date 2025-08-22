@@ -1,4 +1,4 @@
 extends Label
 
-func _on_player_entity_health_change(health: int) -> void:
+func _on_player_root_health_change(health) -> void:
 	text = 'Health: ' + str(health)

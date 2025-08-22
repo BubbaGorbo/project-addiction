@@ -12,6 +12,5 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 
-
-func _on_target_root_on_ready_signal(target: Node3D) -> void:
+func _on_target_root_target_signal(target: Node3D) -> void:
 	text = 'Mana: ' + str(target.mana)

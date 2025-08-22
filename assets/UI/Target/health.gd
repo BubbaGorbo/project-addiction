@@ -7,11 +7,9 @@ func _ready() -> void:
 	#text = str(root_node.target.root_health)
 	pass
 
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
 
-
-func _on_target_root_on_ready_signal(target: Node3D) -> void:
+func _on_target_root_target_signal(target: Node3D) -> void:
 	text = 'Health: ' + str(target.health)
