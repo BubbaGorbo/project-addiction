@@ -5,4 +5,4 @@ extends Control
 signal on_ready_signal
 
 func _ready() -> void:
-	on_ready_signal.emit(target.enemy_node)
+	on_ready_signal.emit(target)

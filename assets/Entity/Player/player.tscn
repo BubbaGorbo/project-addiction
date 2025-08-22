@@ -1,10 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://bvkxbe25d524d"]
+[gd_scene load_steps=7 format=3 uid="uid://bvkxbe25d524d"]
 
 [ext_resource type="Script" path="res://assets/Entity/Player/player.gd" id="1_sfev4"]
-[ext_resource type="Script" path="res://assets/Entity/Player/health.gd" id="2_gpn37"]
 [ext_resource type="Script" path="res://assets/Entity/Player/camera_anchor.gd" id="2_rrdmf"]
 [ext_resource type="Script" path="res://assets/Entity/Player/player_camera.gd" id="2_v88lw"]
-[ext_resource type="Script" path="res://assets/Entity/Player/mana.gd" id="3_wn0tf"]
+[ext_resource type="PackedScene" uid="uid://dlqwd5fqov3n8" path="res://assets/UI/Target/target.tscn" id="4_1t665"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_v58be"]
 
@@ -38,31 +37,6 @@ offset_bottom = -608.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Base-Container" type="PanelContainer" parent="UI"]
-custom_minimum_size = Vector2(100, 100)
+[node name="TargetSelf" parent="UI" node_paths=PackedStringArray("target") instance=ExtResource("4_1t665")]
 layout_mode = 1
-offset_right = 1.0
-offset_bottom = 50.0
-
-[node name="MarginContainer" type="MarginContainer" parent="UI/Base-Container"]
-layout_mode = 2
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
-
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/Base-Container/MarginContainer"]
-layout_mode = 2
-
-[node name="Health" type="Label" parent="UI/Base-Container/MarginContainer/VBoxContainer"]
-layout_mode = 2
-text = "Test"
-script = ExtResource("2_gpn37")
-
-[node name="Mana" type="Label" parent="UI/Base-Container/MarginContainer/VBoxContainer"]
-layout_mode = 2
-text = "Test"
-script = ExtResource("3_wn0tf")
-
-[connection signal="health_change" from="Player-Entity" to="UI/Base-Container/MarginContainer/VBoxContainer/Health" method="_on_player_entity_health_change"]
-[connection signal="mana_change" from="Player-Entity" to="UI/Base-Container/MarginContainer/VBoxContainer/Mana" method="_on_player_entity_mana_change"]
+target = NodePath("../../Player-Entity")

@@ -10,6 +10,8 @@ var max_health = 100
 @export var mana = 50
 var max_mana = 50
 
+var entity_nameplate = 'Player (YOU)'
+
 var isAutorunning = false
 
 signal health_change

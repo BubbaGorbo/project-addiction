@@ -10,9 +10,9 @@
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_sllpf"]
 material = ExtResource("1_hexyo")
 
-[node name="Node3D" type="Node3D" node_paths=PackedStringArray("enemy_node")]
+[node name="Node3D" type="Node3D" node_paths=PackedStringArray("target")]
 script = ExtResource("1_hh113")
-enemy_node = NodePath("StaticBody3D")
+target = NodePath("StaticBody3D")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 script = ExtResource("1_23f0l")
