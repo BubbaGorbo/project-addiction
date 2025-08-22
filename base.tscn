@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://iwahdmmcm0fn"]
+[gd_scene load_steps=4 format=3 uid="uid://iwahdmmcm0fn"]
 
 [ext_resource type="PackedScene" uid="uid://d2su3uy8n0gdy" path="res://assets/landscape.glb" id="1_vrxyk"]
 [ext_resource type="PackedScene" uid="uid://bvkxbe25d524d" path="res://assets/Entity/Player/player.tscn" id="2_gwrxc"]
+[ext_resource type="PackedScene" uid="uid://cabavqyewbbfy" path="res://assets/Entity/Enemies/enemy.tscn" id="3_dr0as"]
 
 [node name="Node3D" type="Node3D"]
 
@@ -11,10 +12,13 @@ transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, 0, 0)
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.666806, 0.745232, 0, -0.745232, 0.666806, -1.84953, 28.0266, 2.82896)
 
-[node name="Node3D" parent="." instance=ExtResource("2_gwrxc")]
+[node name="Player" parent="." instance=ExtResource("2_gwrxc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.01686, 5.6032, 0.879876)
 
 [node name="THISISACSGBOX" type="CSGBox3D" parent="."]
 transform = Transform3D(0.91007, -0.414455, 0, 0.414455, 0.91007, 0, 0, 0, 1, 28.4427, 2.87842, 40.5358)
 use_collision = true
 size = Vector3(8.21048, 0.324707, 3.58154)
+
+[node name="Enemy" parent="." instance=ExtResource("3_dr0as")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.13443, 5.02059, -3.55687)

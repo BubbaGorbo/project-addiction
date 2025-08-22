@@ -24,7 +24,7 @@ mesh = SubResource("CapsuleMesh_ip2jh")
 [node name="Camera-Anchor" type="Node3D" parent="Player-Entity"]
 script = ExtResource("2_rrdmf")
 
-[node name="Player-Camera" type="Camera3D" parent="Player-Entity/Camera-Anchor"]
+[node name="Player-Camera" type="Camera3D" parent="Player-Entity/Camera-Anchor" groups=["player_camera"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 3)
 script = ExtResource("2_v88lw")
 
