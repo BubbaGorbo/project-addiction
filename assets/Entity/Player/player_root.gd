@@ -7,16 +7,21 @@ const JUMP_VELOCITY = 4.5
 
 @export var health = 100
 var max_health = 100
-
 @export var mana = 50
 var max_mana = 50
-
 @export var entity_nameplate = 'Player (YOU)'
+
+var target: Node3D
 
 var isAutorunning = false
 
 signal health_change
 signal mana_change
+signal target_change
+	
+func set_target(node: Node3D) -> void:
+	var target = node
+	target_change.emit(target)
 
 func _ready() -> void:
 	health_change.emit(health)

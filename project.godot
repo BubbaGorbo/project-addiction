@@ -22,7 +22,7 @@ version_control/autoload_on_startup=true
 
 [global_group]
 
-target_enemy="The target window for the selected enemy"
+targetable="Any entity that can be targeted"
 
 [input]
 

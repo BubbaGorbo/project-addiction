@@ -8,6 +8,8 @@ const RAY_LENGTH = 1000
 @onready var viewport = get_viewport()
 @onready var world_3d = get_world_3d()
 
+@export var player: Node3D
+
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
@@ -29,11 +31,10 @@ func _physics_process(delta: float) -> void:
 
 		var result = space_state.intersect_ray(query)
 		var result_parent = null
-		if result is StaticBody3D:
-			result_parent = result.collider.get_parent()
-		if result_parent:
-			# Keep the node group down to one node by clearing it everytime here
-			var target_group = get_tree().get_nodes_in_group("target_enemy")
-			for node in target_group:
-				node.remove_from_group("target_enemy")
-			result_parent.add_to_group("target_enemy")
+		if result:
+			var targetables = get_tree().get_nodes_in_group("targetable")
+			if targetables.find(result.collider) >= 0:
+				result_parent = result.collider.get_parent()
+			if result_parent:
+				player.set_target(result_parent)
+			

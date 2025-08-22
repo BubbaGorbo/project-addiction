@@ -12,7 +12,7 @@ material = ExtResource("1_hexyo")
 [node name="EnemyRoot" type="Node3D"]
 script = ExtResource("1_hh113")
 
-[node name="EnemyStaticBody3D" type="StaticBody3D" parent="."]
+[node name="EnemyStaticBody3D" type="StaticBody3D" parent="." groups=["targetable"]]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="EnemyStaticBody3D"]
 shape = SubResource("CapsuleShape3D_hgu2s")

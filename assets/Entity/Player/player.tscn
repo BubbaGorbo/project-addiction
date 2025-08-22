@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bvkxbe25d524d"]
+[gd_scene load_steps=12 format=3 uid="uid://bvkxbe25d524d"]
 
 [ext_resource type="Script" path="res://assets/Entity/Player/player_root.gd" id="1_fyx2x"]
 [ext_resource type="Script" path="res://assets/Entity/Player/health.gd" id="2_gpn37"]
@@ -6,6 +6,9 @@
 [ext_resource type="Script" path="res://assets/Entity/Player/player_camera.gd" id="2_v88lw"]
 [ext_resource type="Script" path="res://assets/Entity/Player/mana.gd" id="3_wn0tf"]
 [ext_resource type="Script" path="res://assets/Entity/Player/nameplate.gd" id="4_5ux7k"]
+[ext_resource type="Script" path="res://assets/UI/Target/name.gd" id="7_pul1r"]
+[ext_resource type="Script" path="res://assets/UI/Target/health.gd" id="8_bnrt5"]
+[ext_resource type="Script" path="res://assets/UI/Target/mana.gd" id="9_ke7fd"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_v58be"]
 
@@ -15,7 +18,7 @@
 script = ExtResource("1_fyx2x")
 player_entity = NodePath("PlayerEntity")
 
-[node name="PlayerEntity" type="CharacterBody3D" parent="."]
+[node name="PlayerEntity" type="CharacterBody3D" parent="." groups=["targetable"]]
 floor_stop_on_slope = false
 floor_constant_speed = true
 floor_max_angle = 1.39626
@@ -29,9 +32,10 @@ mesh = SubResource("CapsuleMesh_ip2jh")
 [node name="CameraAnchor" type="Node3D" parent="PlayerEntity"]
 script = ExtResource("2_rrdmf")
 
-[node name="PlayerCamera" type="Camera3D" parent="PlayerEntity/CameraAnchor"]
+[node name="PlayerCamera" type="Camera3D" parent="PlayerEntity/CameraAnchor" node_paths=PackedStringArray("player")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 3)
 script = ExtResource("2_v88lw")
+player = NodePath("../../..")
 
 [node name="Nameplate" type="Label3D" parent="PlayerEntity" node_paths=PackedStringArray("player")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
@@ -50,34 +54,72 @@ offset_bottom = -608.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Window" type="Window" parent="UI"]
+[node name="PlayerStats" type="Window" parent="UI"]
 position = Vector2i(50, 50)
 size = Vector2i(200, 100)
 unresizable = true
 always_on_top = true
 unfocusable = true
 
-[node name="PanelContainer" type="PanelContainer" parent="UI/Window"]
+[node name="PanelContainer" type="PanelContainer" parent="UI/PlayerStats"]
 offset_right = 40.0
 offset_bottom = 50.0
 
-[node name="MarginContainer" type="MarginContainer" parent="UI/Window/PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="UI/PlayerStats/PanelContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/Window/PanelContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/PlayerStats/PanelContainer/MarginContainer"]
 layout_mode = 2
 
-[node name="Health" type="Label" parent="UI/Window/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="Health" type="Label" parent="UI/PlayerStats/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 script = ExtResource("2_gpn37")
 
-[node name="Mana" type="Label" parent="UI/Window/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="Mana" type="Label" parent="UI/PlayerStats/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 script = ExtResource("3_wn0tf")
 
-[connection signal="health_change" from="." to="UI/Window/PanelContainer/MarginContainer/VBoxContainer/Health" method="_on_player_root_health_change"]
-[connection signal="mana_change" from="." to="UI/Window/PanelContainer/MarginContainer/VBoxContainer/Mana" method="_on_player_root_mana_change"]
+[node name="TargetStats" type="Window" parent="UI"]
+auto_translate_mode = 1
+position = Vector2i(100, 100)
+size = Vector2i(200, 100)
+unresizable = true
+always_on_top = true
+unfocusable = true
+
+[node name="Container" type="PanelContainer" parent="UI/TargetStats"]
+custom_minimum_size = Vector2(100, 100)
+offset_right = 100.0
+offset_bottom = 100.0
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/TargetStats/Container"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/TargetStats/Container/MarginContainer"]
+layout_mode = 2
+
+[node name="Name" type="Label" parent="UI/TargetStats/Container/MarginContainer/VBoxContainer"]
+layout_mode = 2
+script = ExtResource("7_pul1r")
+
+[node name="Health" type="Label" parent="UI/TargetStats/Container/MarginContainer/VBoxContainer"]
+layout_mode = 2
+script = ExtResource("8_bnrt5")
+
+[node name="Mana" type="Label" parent="UI/TargetStats/Container/MarginContainer/VBoxContainer"]
+layout_mode = 2
+script = ExtResource("9_ke7fd")
+
+[connection signal="health_change" from="." to="UI/PlayerStats/PanelContainer/MarginContainer/VBoxContainer/Health" method="_on_player_root_health_change"]
+[connection signal="mana_change" from="." to="UI/PlayerStats/PanelContainer/MarginContainer/VBoxContainer/Mana" method="_on_player_root_mana_change"]
+[connection signal="target_change" from="." to="UI/TargetStats/Container/MarginContainer/VBoxContainer/Name" method="_on_player_root_target_change"]
+[connection signal="target_change" from="." to="UI/TargetStats/Container/MarginContainer/VBoxContainer/Health" method="_on_player_root_target_change"]
+[connection signal="target_change" from="." to="UI/TargetStats/Container/MarginContainer/VBoxContainer/Mana" method="_on_player_root_target_change"]

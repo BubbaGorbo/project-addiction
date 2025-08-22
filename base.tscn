@@ -1,9 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://iwahdmmcm0fn"]
+[gd_scene load_steps=4 format=3 uid="uid://iwahdmmcm0fn"]
 
 [ext_resource type="PackedScene" uid="uid://d2su3uy8n0gdy" path="res://assets/landscape.glb" id="1_vrxyk"]
 [ext_resource type="PackedScene" uid="uid://bvkxbe25d524d" path="res://assets/Entity/Player/player.tscn" id="2_gwrxc"]
 [ext_resource type="PackedScene" uid="uid://cabavqyewbbfy" path="res://assets/Entity/Enemies/enemy.tscn" id="3_dr0as"]
-[ext_resource type="PackedScene" uid="uid://dlqwd5fqov3n8" path="res://assets/UI/Target/target.tscn" id="4_g7xiy"]
 
 [node name="Node3D" type="Node3D"]
 
@@ -23,9 +22,6 @@ size = Vector3(8.21048, 0.324707, 3.58154)
 
 [node name="EnemyHostile" parent="." instance=ExtResource("3_dr0as")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.13443, 5.02059, -3.55687)
-
-[node name="TargetEnemy" parent="." node_paths=PackedStringArray("target") groups=["target_enemy"] instance=ExtResource("4_g7xiy")]
-target = NodePath("../EnemyHostile")
 
 [node name="EnemyPassive" parent="." instance=ExtResource("3_dr0as")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.92855, 5.41513, -4.85013)
